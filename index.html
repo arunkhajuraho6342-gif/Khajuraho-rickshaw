@@ -35,6 +35,7 @@ header{
     background:white;
     padding:20px;
     border-radius:10px;
+    box-sizing: border-box;
 }
 
 .booking-form input,
@@ -42,6 +43,7 @@ header{
     width:100%;
     padding:12px;
     margin:10px 0;
+    box-sizing: border-box;
 }
 
 button{
@@ -51,6 +53,13 @@ button{
     color:white;
     border:none;
     cursor:pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+button:hover {
+    background: #065634;
 }
 
 .services{
@@ -82,29 +91,29 @@ button{
 <div class="booking-form">
     <h2>Book Now</h2>
 
-    <input type="text" placeholder="Your Name">
+    <input type="text" id="custName" placeholder="Your Name" required>
 
-    <input type="tel" placeholder="Mobile Number">
+    <input type="tel" id="custPhone" placeholder="Mobile Number" required>
 
-    <input type="text" placeholder="Pickup Location">
+    <input type="text" id="pickupLoc" placeholder="Pickup Location" required>
 
-    <select>
-        <option>Select Destination</option>
-        <option>Western Temples</option>
-        <option>Eastern Temples</option>
-        <option>Airport</option>
-        <option>Railway Station</option>
-        <option>Panna Tiger Reserve</option>
-        <option>Pandav Falls</option>
-        <option>Raneh Falls</option>
-        <option>Bateshwar Dham</option>
-        <option>Archaeological Museum</option>
-        <option>Light & Sound Show</option>
+    <select id="destination">
+        <option value="">Select Destination</option>
+        <option value="Western Temples">Western Temples</option>
+        <option value="Eastern Temples">Eastern Temples</option>
+        <option value="Airport">Airport</option>
+        <option value="Railway Station">Railway Station</option>
+        <option value="Panna Tiger Reserve">Panna Tiger Reserve</option>
+        <option value="Pandav Falls">Pandav Falls</option>
+        <option value="Raneh Falls">Raneh Falls</option>
+        <option value="Bateshwar Dham">Bateshwar Dham</option>
+        <option value="Archaeological Museum">Archaeological Museum</option>
+        <option value="Light & Sound Show">Light & Sound Show</option>
     </select>
 
-    <input type="datetime-local">
+    <input type="datetime-local" id="rideTime">
 
-    <button>Book Ride</button>
+    <button onclick="sendToWhatsApp()">Book Ride Via WhatsApp</button>
 </div>
 
 <div class="services">
@@ -124,6 +133,34 @@ button{
         <li>Full-Day Sightseeing Package</li>
     </ul>
 </div>
+
+<script>
+function sendToWhatsApp() {
+    var name = document.getElementById('custName').value;
+    var phone = document.getElementById('custPhone').value;
+    var pickup = document.getElementById('pickupLoc').value;
+    var dest = document.getElementById('destination').value;
+    var time = document.getElementById('rideTime').value;
+
+    if(name == "" || phone == "" || pickup == "" || dest == "") {
+        alert("Please fill all the main details before booking!");
+        return;
+    }
+
+    var myWhatsAppNumber = "919243483419"; 
+
+    var message = "🛺 *New Ride Booking Request* 🛺\n\n" +
+                  "*Name:* " + name + "\n" +
+                  "*Phone:* " + phone + "\n" +
+                  "*Pickup Point:* " + pickup + "\n" +
+                  "*Destination:* " + dest + "\n" +
+                  "*Date & Time:* " + time;
+
+    var whatsappUrl = "https://wa.me/" + myWhatsAppNumber + "?text=" + encodeURIComponent(message);
+
+    window.open(whatsappUrl, '_blank');
+}
+</script>
 
 </body>
 </html>
