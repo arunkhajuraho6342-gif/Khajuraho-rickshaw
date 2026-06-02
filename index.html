@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Khajuraho Rickshaw</title>
 
+<meta property="og:title" content="Khajuraho Rickshaw Booking">
+<meta property="og:description" content="Book E-Rickshaw for Temple Tours, Airport & Railway Station Drop in Khajuraho. Fast & Safe Ride!">
+<meta property="og:image" content="rickshaw.jpg">
+<meta property="og:url" content="https://arunkhajuraho6342-gif.github.io/Khajuraho-rickshaw/">
+
 <style>
 body{
     margin:0;
@@ -47,6 +52,16 @@ header{
     font-size: 15px;
 }
 
+input[type="datetime-local"]::before {
+    content: attr(placeholder);
+    color: #757575;
+    margin-right: 0.5em;
+}
+input[type="datetime-local"]:focus::before,
+input[type="datetime-local"]:valid::before {
+    content: "";
+}
+
 button{
     width:100%;
     padding:14px;
@@ -64,7 +79,6 @@ button:hover {
     background: #065634;
 }
 
-/* Call Button ka naya style */
 .call-btn {
     background: #1072ba;
     display: block;
@@ -108,17 +122,16 @@ button:hover {
 </section>
 
 <div style="text-align: center; margin: 10px auto 30px auto; max-width: 900px; padding: 0 20px; box-sizing: border-box;">
-    <img src="https://i.ibb.co/67vskGmd/arun-rickshaw.jpg" alt="Khajuraho Rickshaw Service" style="width: 100%; max-width: 450px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+    <img src="rickshaw.jpg" alt="Khajuraho Rickshaw Service" style="width: 100%; max-width: 450px; border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
 </div>
 
-<div class="booking-form">
+<form class="booking-form" action="https://formspree.io/f/xykvrdbb" method="POST">
     <h2>Book Now</h2>
 
-    <input type="text" id="custName" placeholder="Your Name" required>
+    <input type="text" name="Customer Name" placeholder="Your Name" required>
+    <input type="tel" name="Customer Phone" placeholder="Mobile Number" required>
 
-    <input type="tel" id="custPhone" placeholder="Mobile Number" required>
-
-    <select id="pickupLoc" required>
+    <select name="Pickup Location" required>
         <option value="">Select Pickup Location</option>
         <option value="Khajuraho Railway Station">Khajuraho Railway Station</option>
         <option value="Khajuraho Airport">Khajuraho Airport</option>
@@ -129,10 +142,10 @@ button:hover {
         <option value="Hotel Clarks Khajuraho">Hotel Clarks Khajuraho</option>
         <option value="Hotel Zen">Hotel Zen</option>
         <option value="MPT Payal / MPT Jhankar">MPT Payal / MPT Jhankar</option>
-        <option value="Other Hotel / My Current Location">Other Hotel / My Current Location</option>
+        <option value="Other Hotel / Current Location">Other Hotel / Current Location</option>
     </select>
 
-    <select id="destination" required>
+    <select name="Destination" required>
         <option value="">Select Destination</option>
         <option value="Western Temples">Western Temples</option>
         <option value="Eastern Temples">Eastern Temples</option>
@@ -146,12 +159,12 @@ button:hover {
         <option value="Light & Sound Show">Light & Sound Show</option>
     </select>
 
-    <input type="datetime-local" id="rideTime">
+    <input type="datetime-local" name="Ride Date and Time" placeholder="Select Date & Time" required>
 
-    <button onclick="sendToWhatsApp()">Book Ride Via WhatsApp</button>
+    <button type="submit">Book Ride Now</button>
     
     <a href="tel:+919243483419" class="call-btn">📞 Call Arun Pal</a>
-</div>
+</form>
 
 <div class="services">
     <h2>Our Services</h2>
@@ -169,34 +182,6 @@ button:hover {
         <li>Full-Day Sightseeing Package</li>
     </ul>
 </div>
-
-<script>
-function sendToWhatsApp() {
-    var name = document.getElementById('custName').value;
-    var phone = document.getElementById('custPhone').value;
-    var pickup = document.getElementById('pickupLoc').value;
-    var dest = document.getElementById('destination').value;
-    var time = document.getElementById('rideTime').value;
-
-    if(name == "" || phone == "" || pickup == "" || dest == "") {
-        alert("Please fill all the main details before booking!");
-        return;
-    }
-
-    var myWhatsAppNumber = "919243483419"; 
-
-    var message = "🛺 *New Ride Booking Request* 🛺\n\n" +
-                  "*Name:* " + name + "\n" +
-                  "*Phone:* " + phone + "\n" +
-                  "*Pickup Point:* " + pickup + "\n" +
-                  "*Destination:* " + dest + "\n" +
-                  "*Date & Time:* " + time;
-
-    var whatsappUrl = "https://wa.me/" + myWhatsAppNumber + "?text=" + encodeURIComponent(message);
-
-    window.open(whatsappUrl, '_blank');
-}
-</script>
 
 </body>
 </html>
